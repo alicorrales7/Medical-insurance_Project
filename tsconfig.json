@@ -1,0 +1,21 @@
+  {
+    "compilerOptions": {
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "es6",
+      "strict": true,
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "outDir": "dist",
+      "resolveJsonModule": true,
+      "experimentalDecorators": true, /* Enable experimental support for TC39 stage 2 draft decorators. */
+      "emitDecoratorMetadata": true,
+      "forceConsistentCasingInFileNames": true,
+      "strictPropertyInitialization": false,
+      "skipLibCheck": true
+    },
+    "include": [
+      "src/**/*"
+    ]
+  }
