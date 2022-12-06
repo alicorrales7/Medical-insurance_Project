@@ -1,7 +1,9 @@
 import express from "express";
 import path from "path";
+import 'reflect-metadata';
 
 import { loadApiEndpoints } from "./controllers/api";
+import { fileRoute } from "./routes/fileRoutes";
 //import { connectDB } from "./util/connection";
 
 // Create Express server
@@ -19,5 +21,6 @@ app.use(
 //connectDB();
 
 loadApiEndpoints(app);
+fileRoute(app);
 
 export default app;
