@@ -9,8 +9,18 @@ export const fileRoute = (app: Application): void => {
 
   const fileControllers = Container.get(FileController);
 
-  app.get("/file", (req: Request, res: Response) => {
+  app.post("/sherpa", (req: Request, res: Response) => {
     logger.info("Route file to access");
-    fileControllers.getFile(res);
+    fileControllers.postSherpa(res,req);
+  });
+
+  app.post("/ambetterBOB", (req: Request, res: Response) => {
+    logger.info("Route file to access");
+    fileControllers.postAmbetterBOB(res,req);
+  });
+
+  app.post("/ambetterComm", (req: Request, res: Response) => {
+    logger.info("Route file to access");
+    fileControllers.postAmbetterCommiss(res,req);
   });
 };

@@ -2,7 +2,7 @@ import fs from "fs";
 import { Service } from "typedi";
 
 import { CompanyClientDTO } from "../../DTO/companyClientDTO.ts";
-import { CompanyBobParserInterface } from "../../Interface/companyBOBParserInterface";
+import { CompanyBobParserInterface } from "../../Interface/Ambetter/companyBOBParserInterface";
 import { AmbetterMapp } from "../../validates/Ambetter/AmbetterMapping";
 
 @Service()
@@ -24,11 +24,12 @@ export class AmbetterBobParse implements CompanyBobParserInterface {
     }
   }
 
-  parse(): CompanyClientDTO[] | string {
+  parse(file:File):object|string {
     const ambetterClient: CompanyClientDTO[] = [];
     const files = this.readFile();
     const ambetterClientWrong: CompanyClientDTO[] = [];
 
+    if(typeof files !== "string"){
     for (let i = 1; i < files.length; i++) {
       const company = {
         exchangeSubscriberID: files[i][13],
@@ -41,6 +42,7 @@ export class AmbetterBobParse implements CompanyBobParserInterface {
         ambetterClientWrong.push(current);
       }
     }
-    return ambetterClient;
+    return {ambetterClient,ambetterClientWrong};
+  }else {return files}
   }
 }

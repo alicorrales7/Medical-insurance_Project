@@ -6,8 +6,18 @@ import { FileRepository } from "../repository/fileRepository";
 export class FileService {
   constructor(private fileRepository: FileRepository) {}
 
-  async getFile() {
-    const file = await this.fileRepository.getFile();
+  async postSherpa(file: File) {
+    const report = await this.fileRepository.postSherpa(file);
+    return file;
+  }
+
+  async postAmbetterBOB(file: File) {
+    const report = await this.fileRepository.postAmbetterBOB(file);
+    return file;
+  }
+
+  async postAmbetterCommiss(file: File) {
+    const report = await this.fileRepository.postAmbetterCommiss(file);
     return file;
   }
 }

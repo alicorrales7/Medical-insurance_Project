@@ -8,7 +8,7 @@ import { SherpaMapp } from "../validates/sherpa/sherpaMapping";
 export class SherpaParse {
   constructor(private sherpaMapp: SherpaMapp) {}
 
-  readFile(): string[][] | string {
+  readFile(file:File): string[][] | string {
     try {
       const files = fs
         .readFileSync("data/Health_Sherpa_BOB.csv", { encoding: "utf8" })
@@ -23,11 +23,12 @@ export class SherpaParse {
     }
   }
 
-   parse(): SherpaBobDto[] | string {
+   parse(file:File): object | string {
     const sherpaClient: SherpaBobDto[] = [];
-    const files = this.readFile();
+    const files = this.readFile(file);
     const sherpaClientWrong: SherpaBobDto[] = [];
 
+    if(typeof files !== "string"){
     for (let i = 1; i < files.length; i++) {
       const sherpa = { ffm_subscriberID: files[i][40] };
       const current = this.sherpaMapp.stringToDTO(sherpa);
@@ -38,6 +39,7 @@ export class SherpaParse {
         sherpaClientWrong.push(current);
       }
     }
-    return sherpaClient;
+    return {sherpaClient,sherpaClientWrong};
+  }else {return files}
   }
 }
