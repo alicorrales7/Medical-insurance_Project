@@ -1,6 +1,6 @@
-import { CommissionStatemDTO } from "../DTO/commissionStatemClientDTO"
+import { CommissionStatemDTO } from "../DTO/commissionStatemClientDTO";
 
-
-export interface CommissionStatemInterface{
-    parse(file:any): CommissionStatemDTO []
+export interface CommissionStatemInterface {
+  readFile(file: File): string[][] | string;
+  parse(file: File): CommissionStatemDTO[];
 }

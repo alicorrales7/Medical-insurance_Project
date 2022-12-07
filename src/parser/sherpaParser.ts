@@ -1,48 +1,43 @@
-import { SherpaBobDto } from "../DTO/SherpaClientDTO";
 import fs from "fs";
-import { SherpaMapp } from "../validates/sherpa/sherpaMapping";
 import { Service } from "typedi";
-import Validator from "../validates/sherpa/validatorSherpaParser";
+
+import { SherpaBobDto } from "../DTO/SherpaClientDTO";
+import { SherpaMapp } from "../validates/sherpa/sherpaMapping";
 
 @Service()
 export class SherpaParse {
-    constructor(private sherpaMapp: SherpaMapp, private validator: Validator){}
+  constructor(private sherpaMapp: SherpaMapp) {}
 
-    readFile(file:any): string[][]|string
-    {
-       try{ 
-        const files = fs.readFileSync("data/Health_Sherpa_BOB.csv", {encoding: "utf8"})
-        .split('\n')
-        .map((row:string) :string[] => {
-            return row.split(',')});
-            console.log(typeof files)
-            return files;
-        }catch(error){
-            return "Problem with read file SherpaParse: " + error
-        }
-        
-
+  readFile(): string[][] | string {
+    try {
+      const files = fs
+        .readFileSync("data/Health_Sherpa_BOB.csv", { encoding: "utf8" })
+        .split("\n")
+        .map((row: string): string[] => {
+          return row.split(",");
+        });
+      console.log(files);
+      return files;
+    } catch (error) {
+      return "Problem with read file Sherpa Book of Business: " + error;
     }
+  }
 
-     async parse(file:any):Promise<SherpaBobDto[]>{
-        const sherpaClient:SherpaBobDto[]= [];
-        const files = this.readFile("jh");
+   parse(): SherpaBobDto[] | string {
+    const sherpaClient: SherpaBobDto[] = [];
+    const files = this.readFile();
+    const sherpaClientWrong: SherpaBobDto[] = [];
 
-            for(let i=1; i<files.length; i++) {
-                const current = this.sherpaMapp.stringToDTO(files[i][40]);
-                
-                let isValid =  await this.validator.validatorS(current)
-                if(isValid === true){
-                    sherpaClient.push(current)
-                }
-                
-                
-            }
-            return sherpaClient;
+    for (let i = 1; i < files.length; i++) {
+      const sherpa = { ffm_subscriberID: files[i][40] };
+      const current = this.sherpaMapp.stringToDTO(sherpa);
+
+      if (current.ffm_subscriberID !== "" ) {
+        sherpaClient.push(current);
+      } else {
+        sherpaClientWrong.push(current);
+      }
     }
-
-    
-
-    
-
+    return sherpaClient;
+  }
 }

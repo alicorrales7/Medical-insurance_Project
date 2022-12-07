@@ -1,11 +1,7 @@
-import { Service } from "typedi";
+export class SherpaBobDto {
+  ffm_subscriberID: string;
 
-
-@Service(  )
-export class SherpaBobDto{
-    ffm_subscriberID : string;
-
-    constructor( ffm_subscriberID:string){
-        this.ffm_subscriberID = ffm_subscriberID;
-    }
+  constructor(t: SherpaBobDto) {
+    this.ffm_subscriberID = t.ffm_subscriberID;
+  }
 }

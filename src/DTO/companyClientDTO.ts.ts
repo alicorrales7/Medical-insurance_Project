@@ -1,6 +1,9 @@
-import { Service } from "typedi";
+export class CompanyClientDTO {
+  exchangeSubscriberID: string;
+  policyNumber: string;
 
-export class CompanyClientDTO{
-    exchangeSubscriberID: string;
-    PolicyNumber: string;
+  constructor(company: CompanyClientDTO) {
+    this.exchangeSubscriberID = company.exchangeSubscriberID;
+    this.policyNumber = company.policyNumber;
+  }
 }

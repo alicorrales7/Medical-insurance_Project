@@ -1,6 +1,6 @@
-import { CompanyClientDTO } from "../DTO/companyClientDTO.ts"
+import { CompanyClientDTO } from "../DTO/companyClientDTO.ts";
 
-export interface CompanyBobParserInterface{
-    parse(file:any): CompanyClientDTO[]
-    validate(file:any): boolean
+export interface CompanyBobParserInterface {
+  readFile(file: File): string[][] | string;
+  parse(file: File): CompanyClientDTO[] | string;
 }

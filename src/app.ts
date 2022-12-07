@@ -1,6 +1,7 @@
+import "reflect-metadata";
+
 import express from "express";
 import path from "path";
-import 'reflect-metadata';
 
 import { loadApiEndpoints } from "./controllers/api";
 import { fileRoute } from "./routes/fileRoutes";
