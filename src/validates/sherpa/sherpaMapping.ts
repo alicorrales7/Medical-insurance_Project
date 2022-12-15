@@ -1,4 +1,3 @@
-import console from "console";
 import { Service } from "typedi";
 
 import { SherpaBobDto } from "../../DTO/SherpaClientDTO";
@@ -6,15 +5,15 @@ import { SherpaBobDto } from "../../DTO/SherpaClientDTO";
 @Service()
 export class SherpaMapp {
   stringToDTO(t: SherpaBobDto): SherpaBobDto {
-    const sherpa:SherpaBobDto = { 
-      ffm_subscriber_id: t.ffm_subscriber_id, 
-      transformerID: this.convert(t.transformerID)
+    const sherpa: SherpaBobDto = {
+      ffm_subscriber_id: t.ffm_subscriber_id,
+      transformerID: this.convert(t.transformerID),
     };
     const returnDTO = new SherpaBobDto(sherpa);
     return returnDTO;
   }
 
-  convert(transformerID:string){  
-    return transformerID?.slice(-7)
+  convert(transformerID: string) {
+    return transformerID?.slice(-7);
   }
 }

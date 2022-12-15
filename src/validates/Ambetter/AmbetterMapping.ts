@@ -4,7 +4,6 @@ import { CompanyClientDTO } from "../../DTO/companyClientDTO.ts";
 
 @Service()
 export class AmbetterMapp {
-
   stringToDTO(t: CompanyClientDTO): CompanyClientDTO {
     const comp = {
       exchangeSubscriberID: this.consvertOriginal(t.exchangeSubscriberID),
@@ -15,14 +14,12 @@ export class AmbetterMapp {
     return returnDTO;
   }
 
-  consvertOriginal(exchangeSubscriberID:string){
-    const final = exchangeSubscriberID?.slice(1,-1)
-    return final
+  consvertOriginal(exchangeSubscriberID: string) {
+    const final = exchangeSubscriberID?.slice(1, -1);
+    return final;
   }
 
-  convert(transformerID:string){
-     return transformerID?.slice(-8,-1)
+  convert(transformerID: string) {
+    return transformerID?.slice(-8, -1);
   }
-
-
 }

@@ -6,4 +6,3 @@ export async function connectDB() {
   );
   console.log("database is connected", db.connection.db.databaseName);
 }
-       

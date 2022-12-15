@@ -6,7 +6,7 @@ export class CommissionStatemDTO {
   amount: string;
   ifPay: boolean;
 
-  constructor(comm: CommissionStatemDTO){
+  constructor(comm: CommissionStatemDTO) {
     this.policyNumber = comm.policyNumber;
     this.name = comm.name;
     this.numberMember = comm.numberMember;
@@ -15,4 +15,3 @@ export class CommissionStatemDTO {
     this.ifPay = comm.ifPay;
   }
 }
-
