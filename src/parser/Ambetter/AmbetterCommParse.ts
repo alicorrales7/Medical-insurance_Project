@@ -45,7 +45,7 @@ export class AmbetterCommParser implements CommissionStatemInterface{
                 ambetterCommissClientWrong.push(current);
               }
             }
-            return  {ambetterCommissClient,ambetterCommissClientWrong};
+            return  [ambetterCommissClient,ambetterCommissClientWrong];
         }else {return files}
         
         

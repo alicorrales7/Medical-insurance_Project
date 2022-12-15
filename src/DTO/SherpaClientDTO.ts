@@ -1,7 +1,12 @@
 export class SherpaBobDto {
-  ffm_subscriberID: string;
+  ffm_subscriber_id: string;
+  transformerID: string;
 
   constructor(t: SherpaBobDto) {
-    this.ffm_subscriberID = t.ffm_subscriberID;
+    this.ffm_subscriber_id = t.ffm_subscriber_id;
+    this.transformerID = t.transformerID
   }
+
+  
+
 }

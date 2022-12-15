@@ -8,38 +8,48 @@ import { SherpaMapp } from "../validates/sherpa/sherpaMapping";
 export class SherpaParse {
   constructor(private sherpaMapp: SherpaMapp) {}
 
-  readFile(file:File): string[][] | string {
-    try {
+  private readFile(filePath:string): string[][] | string| any {
+    try{
       const files = fs
-        .readFileSync("data/Health_Sherpa_BOB.csv", { encoding: "utf8" })
-        .split("\n")
-        .map((row: string): string[] => {
-          return row.split(",");
-        });
-      console.log(files);
-      return files;
-    } catch (error) {
-      return "Problem with read file Sherpa Book of Business: " + error;
-    }
+      .readFileSync(filePath, { encoding: "utf8" })
+      .split("\n")
+      .map((row: string): string[] => {
+        return row.split(",");
+      });
+    return files;
+  }catch(error){
+    return "Problem with read file Sherpa Book of Business: " + error;
+  }
+    
+    
   }
 
-   parse(file:File): object | string {
+   parse(file:Array<object>,): object {
+    const filePath = JSON.parse(JSON.stringify(file[0]))
     const sherpaClient: SherpaBobDto[] = [];
-    const files = this.readFile(file);
     const sherpaClientWrong: SherpaBobDto[] = [];
+    const files = this.readFile(filePath.path);
+    
 
     if(typeof files !== "string"){
     for (let i = 1; i < files.length; i++) {
-      const sherpa = { ffm_subscriberID: files[i][40] };
+      const sherpa = { ffm_subscriber_id: files[i][41], transformerID: files[i][41] };
       const current = this.sherpaMapp.stringToDTO(sherpa);
 
-      if (current.ffm_subscriberID !== "" ) {
+      if (current.transformerID !== "" ) {
         sherpaClient.push(current);
       } else {
         sherpaClientWrong.push(current);
       }
     }
-    return {sherpaClient,sherpaClientWrong};
-  }else {return files}
+    const report = {good: sherpaClient, bad: sherpaClientWrong}
+    return report;
+  }else {throw "new Exception"}
   }
 }
+
+
+//return "Problem with read file Sherpa Book of Business: " + error;
+// const datat = fs.createReadStream(filePath).pipe(parse()).on('data', function(data){
+//   console.log(data)
+// })

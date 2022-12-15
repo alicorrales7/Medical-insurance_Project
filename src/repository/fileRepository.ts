@@ -1,32 +1,19 @@
 import { Service } from "typedi";
 import { Logger } from "winston";
-import fs from "fs";
 
 
-import { AmbetterBobParse } from "../parser/Ambetter/AmbetterBobParse";
-import { SherpaParse } from "../parser/sherpaParser";
-import { AmbetterCommParser } from "../parser/Ambetter/AmbetterCommParse";
+import { Orquestrator } from "./logic/orquestrator";
 
 @Service()
 export class FileRepository {
   constructor(
-    private sherpaParser: SherpaParse,
-    private ambetterPaser: AmbetterBobParse,
-    private ambetterCommParser: AmbetterCommParser
+    private orquestrator: Orquestrator
   ) {}
 
-  async postSherpa(file:File) {
-    const parse = await this.sherpaParser.parse(file);
-    return parse;
+  async filesReport(sherpa: Array<object>, companyBOB:Array<object>,companyComm: Array<object>, nameCompany: string) {
+    const report = this.orquestrator.index(sherpa, companyBOB, companyComm, nameCompany)
+    return report;;
   }
 
-  async postAmbetterBOB(file:File){
-    const parse = await this.ambetterPaser.parse(file);
-    return parse;
-  }
-
-  async postAmbetterCommiss(file:File){
-    const parse = await this.ambetterCommParser.parse();
-    return parse;
-  }   
+  
 }

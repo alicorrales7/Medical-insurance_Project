@@ -6,7 +6,7 @@ export class CommissionAmbetterMapp{
 
     stringToDTO(t:CommissionStatemDTO):CommissionStatemDTO{
         const comm = {
-            policyNumber: t.policyNumber,
+            policyNumber: this.consvertOriginal(t.policyNumber),
             name: t.name,
             numberMember: t.numberMember,
             commissionDate: t.commissionDate,
@@ -17,4 +17,9 @@ export class CommissionAmbetterMapp{
          const returnDTO= new CommissionStatemDTO(comm);
          return returnDTO;
     }
+
+    consvertOriginal(exchangeSubscriberID:string){
+        const final = exchangeSubscriberID?.slice(0,-1)
+        return final
+      }
 }
