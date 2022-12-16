@@ -1,4 +1,4 @@
-import { parse } from "path";
+
 import { Service } from "typedi";
 
 import { config } from "../../util/config";

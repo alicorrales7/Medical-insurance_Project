@@ -5,6 +5,7 @@ import { CompanyBobParserInterface } from "../../Interface/Ambetter/companyBOBPa
 import { AmbetterBobParse } from "../../parser/Ambetter/AmbetterBobParse";
 import { AmbetterCommParser } from "../../parser/Ambetter/AmbetterCommParse";
 import { SherpaParse } from "../../parser/sherpaParser";
+import { countMony } from "./cantMony";
 import { CompanyParserResolver } from "./companyParserResolver";
 import { findBetweenBobCs } from "./findBetweenBobCs";
 import { findElementsBetweenBOBs } from "./findElementsBetweenBOBs";
@@ -19,7 +20,8 @@ export class Orquestrator {
     private sherpaParser: SherpaParse,
     private findElementsComm: findElementsBetweenBOBs,
     private findBetweenBobCs: findBetweenBobCs,
-    private findReportCommiS: findReportCommiS
+    private findReportCommiS: findReportCommiS,
+    private countMony: countMony
   ) {}
 
   index(
@@ -55,18 +57,23 @@ export class Orquestrator {
       companyCStArray[0],
       informBetweenBOBs[0]
     );
-    const informClientsCSgood = informBetweenBobCs[0];
+    
 
     //return clients that have more than one present Commission Statem
     const findReportCommiS = this.findReportCommiS.dateResponse(
-      companyCStArray[0]
+      informBetweenBobCs[0]
     );
 
-    //const cantMony =
+    const commonElementsBetweenSherpaCompany = informBetweenBOBs[0]
+    const elementsOnlySherpa = informBetweenBOBs[1]
+    const elementsOnlyCompanyBOB = informBetweenBOBs[2]
+    const elementsWithOutPolicyNumber = informBetweenBOBs[3]
+    const informClientsCSgood = informBetweenBobCs[0];
+    const clientsOnlyCS = informBetweenBobCs[1]
+    const clientsOnlyBOBCommon = informBetweenBobCs[2]
+    
+    const cantMony = this.countMony.count(informClientsCSgood);
 
-    return { informClientsCSgood, findReportCommiS };
+    return { informClientsCSgood, findReportCommiS, cantMony };
   }
 }
-//const companyBOBFileConverter = JSON.parse(JSON.stringify(companyBOBFile[0]))
-
-7;
