@@ -32,19 +32,27 @@ export class Orquestrator {
   ) {
     //This is the the code that send file to SherpaParse and get both Arrays wit good and bad Clients
     const sherpaArray = this.sherpaParser.parse(SherpaBobFIle);
-
+    if (typeof sherpaArray === "string") {
+      return { sherpaArray };
+    }
     //This is the the code that send file to companyBOB and get both Arrays wit good and bad Clients
     // with the adapter of CompanyBOB
     const parserid = this.companyBOBParserResolver.resolve(nameCompany);
     const companyBOBParser: CompanyBobParserInterface =
       Container.get(AmbetterBobParse); // parserid
     const companyBobArray = companyBOBParser.parse(companyBOBFile);
+    if (typeof companyBobArray === "string") {
+      return { companyBobArray };
+    }
 
     const comm = companyBOBParser.commissionAsignate();
     const CommissionSParser: CommissionStatemInterface =
       Container.get(AmbetterCommParser); //comm
     //separar las informaciones de la variable en buenas y malas
     const companyCStArray = CommissionSParser.parse(companyComm);
+    if (typeof companyCStArray === "string") {
+      return { companyCStArray };
+    }
 
     //[commonElementsBetweenSherpaCompany,elementsOnlySherpa,elementsOnlyCompanyBOB, elementsWithOutPolicyNumber]
     const informBetweenBOBs = this.findElementsComm.analysisBetweenBOB(
@@ -57,21 +65,20 @@ export class Orquestrator {
       companyCStArray[0],
       informBetweenBOBs[0]
     );
-    
 
     //return clients that have more than one present Commission Statem
     const findReportCommiS = this.findReportCommiS.dateResponse(
       informBetweenBobCs[0]
     );
 
-    const commonElementsBetweenSherpaCompany = informBetweenBOBs[0]
-    const elementsOnlySherpa = informBetweenBOBs[1]
-    const elementsOnlyCompanyBOB = informBetweenBOBs[2]
-    const elementsWithOutPolicyNumber = informBetweenBOBs[3]
+    const commonElementsBetweenSherpaCompany = informBetweenBOBs[0];
+    const elementsOnlySherpa = informBetweenBOBs[1];
+    const elementsOnlyCompanyBOB = informBetweenBOBs[2];
+    const elementsWithOutPolicyNumber = informBetweenBOBs[3];
     const informClientsCSgood = informBetweenBobCs[0];
-    const clientsOnlyCS = informBetweenBobCs[1]
-    const clientsOnlyBOBCommon = informBetweenBobCs[2]
-    
+    const clientsOnlyCS = informBetweenBobCs[1];
+    const clientsOnlyBOBCommon = informBetweenBobCs[2];
+
     const cantMony = this.countMony.count(informClientsCSgood);
 
     return { informClientsCSgood, findReportCommiS, cantMony };

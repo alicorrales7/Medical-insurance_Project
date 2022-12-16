@@ -23,13 +23,21 @@ export class AmbetterBobParse implements CompanyBobParserInterface {
     }
   }
 
-  parse(file: Array<object>): object {
+  parse(file: Array<object>): object | string {
     const filePath = JSON.parse(JSON.stringify(file[0]));
     const ambetterClientWrong: CompanyClientDTO[] = [];
     const ambetterClient: CompanyClientDTO[] = [];
     const files = this.readFile(filePath.path);
+    let cont;
 
-    if (typeof files !== "string") {
+    for (let index = 0; index < files[0].length; index++) {
+      const element = files[0][index];
+      if (element === "Exchange Subscriber ID") {
+        cont = index;
+      }
+    }
+
+    if (files[0][cont] === "Exchange Subscriber ID") {
       for (let i = 1; i < files.length; i++) {
         const company = {
           exchangeSubscriberID: files[i][13],
@@ -49,7 +57,7 @@ export class AmbetterBobParse implements CompanyBobParserInterface {
       const report = { good: ambetterClient, bad: ambetterClientWrong };
       return report;
     } else {
-      throw "new Exception";
+      return "'Invalid process that Ambetter BOB File'";
     }
   }
   commissionAsignate(): string {

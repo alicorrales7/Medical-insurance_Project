@@ -27,7 +27,7 @@ export class AmbetterCommParser implements CommissionStatemInterface {
     const ambetterCommissClientWrong: CommissionStatemDTO[] = [];
     const files = this.readFile();
 
-    if (typeof files !== "string") {
+    if (typeof files[0][11] === "string") {
       for (let i = 1; i < files.length; i++) {
         const company = {
           policyNumber: files[i][11],
@@ -52,9 +52,7 @@ export class AmbetterCommParser implements CommissionStatemInterface {
       }
       return [ambetterCommissClient, ambetterCommissClientWrong];
     } else {
-      return files;
+      return "Invalid process that Ambetter Commission Statement File";
     }
   }
 }
-//return files[0][11]+ " + " + files[0][1] + " + " + files[0][2] + " + " + files[0][6] + " + " +
-//files[0][8] + " + " + files[0][10] ;

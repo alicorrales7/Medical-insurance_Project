@@ -18,7 +18,7 @@ export class findBetweenBobCs {
       );
     });
 
-    clientsCommon.forEach(element => {
+    clientsCommon.forEach((element) => {
       element.ifPay = true;
     });
     return [clientsCommon, clientsOnlyCS, clientsOnlyBOBCommon];

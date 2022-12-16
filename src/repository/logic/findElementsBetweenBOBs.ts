@@ -2,7 +2,6 @@ import { Service } from "typedi";
 
 @Service()
 export class findElementsBetweenBOBs {
-
   analysisBetweenBOB(sherpaArray: any, BOBarray: any) {
     const companyBOBgoodClient = BOBarray.good;
     const companyBOBbadClient = BOBarray.bad;
