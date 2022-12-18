@@ -67,7 +67,7 @@ export class Orquestrator {
     );
 
     //return clients that have more than one present Commission Statem
-    const findReportCommiS = this.findReportCommiS.dateResponse(
+    const findElementsRepeatDate = this.findReportCommiS.dateResponse(
       informBetweenBobCs[0]
     );
 
@@ -81,6 +81,6 @@ export class Orquestrator {
 
     const cantMony = this.countMony.count(informClientsCSgood);
 
-    return { informClientsCSgood, findReportCommiS, cantMony };
+    return { companyBobArray, cantMony };
   }
 }

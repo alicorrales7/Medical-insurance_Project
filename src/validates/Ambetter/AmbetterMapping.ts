@@ -7,8 +7,9 @@ export class AmbetterMapp {
   stringToDTO(t: CompanyClientDTO): CompanyClientDTO {
     const comp = {
       exchangeSubscriberID: this.consvertOriginal(t.exchangeSubscriberID),
-      transformerID: this.convert(t.exchangeSubscriberID),
+      name: t.name,
       policyNumber: t.policyNumber,
+      transformerID: this.convert(t.exchangeSubscriberID),
     };
     const returnDTO = new CompanyClientDTO(comp);
     return returnDTO;

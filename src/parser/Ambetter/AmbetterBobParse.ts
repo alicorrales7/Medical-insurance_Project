@@ -41,8 +41,9 @@ export class AmbetterBobParse implements CompanyBobParserInterface {
       for (let i = 1; i < files.length; i++) {
         const company = {
           exchangeSubscriberID: files[i][13],
-          transformerID: files[i][13],
+          name: files[1][3]+ " " + files[i][4],
           policyNumber: files[i][2],
+          transformerID: files[i][13],
         };
         const current = this.ambetterMapp.stringToDTO(company);
         if (
