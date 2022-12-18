@@ -20,4 +20,4 @@ jobs:
     - run: npm ci
     - run: npm install
     - run: npm run build --if-present
-    - run: backend_mario_work
+    - run: sudo pm2 restart backend_mario_work
