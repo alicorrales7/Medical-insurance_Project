@@ -6,7 +6,8 @@ import path from "path";
 import { loadApiEndpoints } from "./controllers/api";
 import { fileRoute } from "./routes/fileRoutes";
 import cors from "cors"
-//import { connectDB } from "./util/connection";
+import { userRoute } from "./routes/userRoutes";
+import { connectDB } from "./util/connection";
 
 // Create Express server
 const app = express();
@@ -21,9 +22,10 @@ app.use(
   express.static(path.join(__dirname, "../public"), { maxAge: 31557600000 })
 );
 
-//connectDB();
+connectDB();
 
 loadApiEndpoints(app);
+userRoute(app);
 fileRoute(app);
 
 export default app;
