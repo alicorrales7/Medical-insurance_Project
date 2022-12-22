@@ -81,6 +81,6 @@ export class Orquestrator {
 
     const cantMony = this.countMony.count(informClientsCSgood);
 
-    return { cantMony, informClientsCSgood, findElementsRepeatDate  };
+    return { companyBobArray, cantMony, elementsOnlySherpa, elementsOnlyCompanyBOB, clientsOnlyCS, informClientsCSgood, findElementsRepeatDate  };
   }
 }
