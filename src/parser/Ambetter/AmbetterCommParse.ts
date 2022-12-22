@@ -8,10 +8,11 @@ import { CommissionAmbetterMapp } from "../../validates/Ambetter/commissionAmbet
 @Service()
 export class AmbetterCommParser implements CommissionStatemInterface {
   constructor(private commissionAmbetterMapping: CommissionAmbetterMapp) {}
-  readFile(): string[][] | string {
+
+  readFile(filePath: string): string[][] | string {
     try {
       const files = fs
-        .readFileSync("data/Ambetter_Comm.csv", { encoding: "utf8" })
+        .readFileSync(filePath, { encoding: "utf8" })
         .split("\n")
         .map((row: string): string[] => {
           return row.split(",");
@@ -22,10 +23,11 @@ export class AmbetterCommParser implements CommissionStatemInterface {
     }
   }
 
-  parse(): object | string {
+  parse(file: Array<object>): object | string {
+    const filePath = JSON.parse(JSON.stringify(file[0]));
     const ambetterCommissClient: CommissionStatemDTO[] = [];
     const ambetterCommissClientWrong: CommissionStatemDTO[] = [];
-    const files = this.readFile();
+    const files = this.readFile(filePath.path);
 
     if (typeof files[0][11] === "string") {
       for (let i = 1; i < files.length; i++) {

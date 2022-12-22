@@ -1,4 +1,4 @@
 export interface CommissionStatemInterface {
-  readFile(): string[][] | string;
+  readFile(filePath: string): string[][] | string;
   parse(file: object): object | string;
 }
