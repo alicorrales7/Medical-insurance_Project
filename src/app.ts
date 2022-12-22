@@ -5,6 +5,7 @@ import path from "path";
 
 import { loadApiEndpoints } from "./controllers/api";
 import { fileRoute } from "./routes/fileRoutes";
+import cors from "cors"
 //import { connectDB } from "./util/connection";
 
 // Create Express server
@@ -13,6 +14,7 @@ const app = express();
 // Express configuration
 app.set("port", process.env.PORT || 3000);
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(

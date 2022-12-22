@@ -40,6 +40,7 @@
     "@typegoose/typegoose": "^9.10.1",
     "@types/multer": "^1.4.7",
     "class-validator": "^0.13.2",
+    "cors": "^2.8.5",
     "csv-parse": "^5.3.3",
     "dto-mapping": "^1.1.1",
     "express": "^4.17.2",
