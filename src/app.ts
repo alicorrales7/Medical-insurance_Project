@@ -1,11 +1,12 @@
 import "reflect-metadata";
 
+import cors from "cors";
 import express from "express";
 import path from "path";
 
 import { loadApiEndpoints } from "./controllers/api";
+import { authRoute } from "./routes/authRoutes";
 import { fileRoute } from "./routes/fileRoutes";
-import cors from "cors"
 import { userRoute } from "./routes/userRoutes";
 import { connectDB } from "./util/connection";
 
@@ -27,5 +28,6 @@ connectDB();
 loadApiEndpoints(app);
 userRoute(app);
 fileRoute(app);
+authRoute(app);
 
 export default app;
