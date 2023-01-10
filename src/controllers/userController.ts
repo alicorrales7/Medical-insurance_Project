@@ -47,7 +47,6 @@ class UserController {
 
       //Respuesta en un JSON
       res.json({ user });
-
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Error inesperado... revisar logs" });
@@ -62,7 +61,7 @@ class UserController {
       return res.json({
         Result: "Update User is Successful",
         resultUpdate,
-        update
+        update,
       });
     } else {
       return res.json({ Result: "Format Id Incorrecto" });
@@ -73,7 +72,7 @@ class UserController {
     const user = req.params.id;
     if (user.length == 24) {
       const resultDelete = this.userService.deleteUser(req.params.id);
-      return res.status(204).json({ Result: "Delete User" });
+      return res.status(204).json({ Result: "Delete User :", resultDelete });
     } else {
       return res.json({ Result: "Format Id Incorrecto" });
     }

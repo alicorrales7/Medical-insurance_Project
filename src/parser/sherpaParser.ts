@@ -28,7 +28,7 @@ export class SherpaParse {
     const sherpaClientWrong: SherpaBobDto[] = [];
     const files = this.readFile(filePath.path);
     let cont;
-    
+
     for (let index = 0; index < files[0].length; index++) {
       const element = files[0][index];
       if (element === "ffm_subscriber_id") {
@@ -40,7 +40,7 @@ export class SherpaParse {
       for (let i = 1; i < files.length; i++) {
         const sherpa = {
           ffm_subscriber_id: files[i][cont],
-          name: files[i][0]+" "+files[i][1],
+          name: files[i][0] + " " + files[i][1],
           transformerID: files[i][cont],
         };
         const current = this.sherpaMapp.stringToDTO(sherpa);

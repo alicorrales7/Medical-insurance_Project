@@ -15,7 +15,6 @@ export class AuthRepository {
     //Verificar emial
     const userDB = await userModel.findOne({ email });
 
-    
     if (!userDB) {
       return 1;
     }
@@ -27,17 +26,16 @@ export class AuthRepository {
       return 2;
     }
 
-        //Generar Token - JWT
+    //Generar Token - JWT
     const token = await generarJWT(userDB.id);
     return token;
   }
 
   async renewToken(uid: string) {
-    const convert = { "_id": uid };
+    const convert = { _id: uid };
     const token = await generarJWT(uid);
 
     const user = await userModel.findOne(convert);
     return [token, user];
   }
-
 }

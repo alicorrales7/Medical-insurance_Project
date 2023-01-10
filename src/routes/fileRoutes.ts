@@ -1,9 +1,9 @@
 import express, { Application, Request, Response } from "express";
 import multer from "multer";
 import Container from "typedi";
-import { valitor } from "../middlewares/validator-jwt";
 
 import { FileController } from "../controllers/fileController";
+import { valitor } from "../middlewares/validator-jwt";
 
 export const fileRoute = (app: Application): void => {
   app.use(express.json());
@@ -16,7 +16,12 @@ export const fileRoute = (app: Application): void => {
     { name: "companyComm" },
   ]);
 
-  app.post("/sherpa/:name", multipleUploads, valitor, (req: Request, res: Response) => {
-    fileControllers.filesReport(res, req);
-  });
+  app.post(
+    "/sherpa/:name",
+    multipleUploads,
+    valitor,
+    (req: Request, res: Response) => {
+      fileControllers.filesReport(res, req);
+    }
+  );
 };

@@ -14,22 +14,21 @@ export const userRoute = (app: Application): void => {
     console.log(find);
   });
 
-  app.get("/user/:id", valitor,(req, res) => {
+  app.get("/user/:id", valitor, (req, res) => {
     const findOne = userController.getUser(req, res);
   });
 
-  app.post("/user",valitor, (req, res) => {
+  app.post("/user", valitor, (req, res) => {
     const insert = userController.createUser(req, res);
   });
 
-  app.put("/user/:id",valitor, (req, res) => {
+  app.put("/user/:id", valitor, (req, res) => {
     const update = userController.updateUser(req, res);
     console.log("Edit Successful");
   });
 
-  app.delete("/user/:id",valitor, (req, res) => {
+  app.delete("/user/:id", valitor, (req, res) => {
     const deleteUser = userController.deleteUser(req, res);
     console.log("Delete Successful");
   });
-
 };

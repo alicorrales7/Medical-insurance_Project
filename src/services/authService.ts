@@ -4,8 +4,7 @@ import { AuthRepository } from "../repository/authRepository";
 
 @Service()
 export class authService {
-  constructor(private authRepository: AuthRepository) {
-  }
+  constructor(private authRepository: AuthRepository) {}
 
   async findUser(username: string, password: string) {
     const auth = await this.authRepository.findUser(username, password);
