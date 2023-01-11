@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-node@v3
       with:
         cache: 'npm'
-    - run: sudo npm ci
-    - run: sudo npm install
-    - run: sudo npm run build --if-present
-    - run: sudo pm2 restart work
+    - run: npm ci
+    - run: npm install
+    - run: npm run build --if-present
+    - run: pm2 restart work
